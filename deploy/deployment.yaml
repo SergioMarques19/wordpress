@@ -1,262 +1,44 @@
-apiVersion: v1
-kind: Pod
+---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  annotations:
-    cattle.io/timestamp: "2022-03-18T21:22:39Z"
-    field.cattle.io/ports: '[[{"containerPort":80,"dnsName":"wordpress-loadbalancer","hostPort":0,"kind":"LoadBalancer","name":"wordpress-port","protocol":"TCP","sourcePort":80}]]'
-  creationTimestamp: "2022-03-18T21:23:08Z"
-  generateName: wordpress-66b7cb5968-
-  labels:
-    pod-template-hash: 66b7cb5968
-    workload.user.cattle.io/workloadselector: deployment-devops-wordpress
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          .: {}
-          f:cattle.io/timestamp: {}
-          f:field.cattle.io/ports: {}
-        f:generateName: {}
-        f:labels:
-          .: {}
-          f:pod-template-hash: {}
-          f:workload.user.cattle.io/workloadselector: {}
-        f:ownerReferences:
-          .: {}
-          k:{"uid":"3fb95696-3952-4ef3-95be-2b8fe0f923ff"}:
-            .: {}
-            f:apiVersion: {}
-            f:blockOwnerDeletion: {}
-            f:controller: {}
-            f:kind: {}
-            f:name: {}
-            f:uid: {}
-      f:spec:
-        f:containers:
-          k:{"name":"wordpress"}:
-            .: {}
-            f:env:
-              .: {}
-              k:{"name":"WORDPRESS_DB_HOST"}:
-                .: {}
-                f:name: {}
-                f:value: {}
-              k:{"name":"WORDPRESS_DB_PASSWORD"}:
-                .: {}
-                f:name: {}
-                f:valueFrom:
-                  .: {}
-                  f:secretKeyRef:
-                    .: {}
-                    f:key: {}
-                    f:name: {}
-                    f:optional: {}
-            f:image: {}
-            f:imagePullPolicy: {}
-            f:name: {}
-            f:ports:
-              .: {}
-              k:{"containerPort":80,"protocol":"TCP"}:
-                .: {}
-                f:containerPort: {}
-                f:name: {}
-                f:protocol: {}
-            f:resources: {}
-            f:securityContext:
-              .: {}
-              f:allowPrivilegeEscalation: {}
-              f:capabilities: {}
-              f:privileged: {}
-              f:readOnlyRootFilesystem: {}
-              f:runAsNonRoot: {}
-            f:stdin: {}
-            f:terminationMessagePath: {}
-            f:terminationMessagePolicy: {}
-            f:tty: {}
-            f:volumeMounts:
-              .: {}
-              k:{"mountPath":"/var/www/html"}:
-                .: {}
-                f:mountPath: {}
-                f:name: {}
-        f:dnsPolicy: {}
-        f:enableServiceLinks: {}
-        f:restartPolicy: {}
-        f:schedulerName: {}
-        f:securityContext: {}
-        f:terminationGracePeriodSeconds: {}
-        f:volumes:
-          .: {}
-          k:{"name":"wordpress-volume"}:
-            .: {}
-            f:name: {}
-            f:persistentVolumeClaim:
-              .: {}
-              f:claimName: {}
-    manager: kube-controller-manager
-    operation: Update
-    time: "2022-03-18T21:23:08Z"
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:status:
-        f:conditions:
-          k:{"type":"ContainersReady"}:
-            .: {}
-            f:lastProbeTime: {}
-            f:lastTransitionTime: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Initialized"}:
-            .: {}
-            f:lastProbeTime: {}
-            f:lastTransitionTime: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Ready"}:
-            .: {}
-            f:lastProbeTime: {}
-            f:lastTransitionTime: {}
-            f:status: {}
-            f:type: {}
-        f:containerStatuses: {}
-        f:hostIP: {}
-        f:phase: {}
-        f:podIP: {}
-        f:podIPs:
-          .: {}
-          k:{"ip":"10.120.2.9"}:
-            .: {}
-            f:ip: {}
-        f:startTime: {}
-    manager: kubelet
-    operation: Update
-    time: "2022-03-18T21:23:29Z"
-  name: wordpress-66b7cb5968-bmgzp
   namespace: devops
-  ownerReferences:
-  - apiVersion: apps/v1
-    blockOwnerDeletion: true
-    controller: true
-    kind: ReplicaSet
-    name: wordpress-66b7cb5968
-    uid: 3fb95696-3952-4ef3-95be-2b8fe0f923ff
-  resourceVersion: "97838"
-  uid: 1c5041a4-b838-4238-ac39-b4a2037676b6
+  labels:
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: deployment-devops-wordpress
+  name: wordpress
 spec:
-  containers:
-  - env:
-    - name: WORDPRESS_DB_HOST
-      value: mysql
-    - name: WORDPRESS_DB_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          key: mysql-password
-          name: mysql-secrets
-          optional: false
-    image: wordpress:4.8-apache
-    imagePullPolicy: Always
-    name: wordpress
-    ports:
-    - containerPort: 80
-      name: wordpress-port
-      protocol: TCP
-    resources: {}
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities: {}
-      privileged: false
-      readOnlyRootFilesystem: false
-      runAsNonRoot: false
-    stdin: true
-    terminationMessagePath: /dev/termination-log
-    terminationMessagePolicy: File
-    tty: true
-    volumeMounts:
-    - mountPath: /var/www/html
-      name: wordpress-volume
-    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-vc7g9
-      readOnly: true
-  dnsPolicy: ClusterFirst
-  enableServiceLinks: true
-  nodeName: gke-rancher-kubernetes-nodes-c0865419-609h
-  preemptionPolicy: PreemptLowerPriority
-  priority: 0
-  restartPolicy: Always
-  schedulerName: default-scheduler
-  securityContext: {}
-  serviceAccount: default
-  serviceAccountName: default
-  terminationGracePeriodSeconds: 30
-  tolerations:
-  - effect: NoExecute
-    key: node.kubernetes.io/not-ready
-    operator: Exists
-    tolerationSeconds: 300
-  - effect: NoExecute
-    key: node.kubernetes.io/unreachable
-    operator: Exists
-    tolerationSeconds: 300
-  volumes:
-  - name: wordpress-volume
-    persistentVolumeClaim:
-      claimName: wordpress-volume
-  - name: kube-api-access-vc7g9
-    projected:
-      defaultMode: 420
-      sources:
-      - serviceAccountToken:
-          expirationSeconds: 3607
-          path: token
-      - configMap:
-          items:
-          - key: ca.crt
-            path: ca.crt
-          name: kube-root-ca.crt
-      - downwardAPI:
-          items:
-          - fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-            path: namespace
-status:
-  conditions:
-  - lastProbeTime: null
-    lastTransitionTime: "2022-03-18T21:23:08Z"
-    status: "True"
-    type: Initialized
-  - lastProbeTime: null
-    lastTransitionTime: "2022-03-18T21:23:29Z"
-    status: "True"
-    type: Ready
-  - lastProbeTime: null
-    lastTransitionTime: "2022-03-18T21:23:29Z"
-    status: "True"
-    type: ContainersReady
-  - lastProbeTime: null
-    lastTransitionTime: "2022-03-18T21:23:08Z"
-    status: "True"
-    type: PodScheduled
-  containerStatuses:
-  - containerID: docker://c96ea810bb65b3cb2f0c6c26a70dd05c06c49c112836f43170673fefdfa6c0d3
-    image: wordpress:4.8-apache
-    imageID: docker-pullable://wordpress@sha256:6216f64ab88fc51d311e38c7f69ca3f9aaba621492b4f1fa93ddf63093768845
-    lastState: {}
-    name: wordpress
-    ready: true
-    restartCount: 0
-    started: true
-    state:
-      running:
-        startedAt: "2022-03-18T21:23:29Z"
-  hostIP: 10.158.0.37
-  phase: Running
-  podIP: 10.120.2.9
-  podIPs:
-  - ip: 10.120.2.9
-  qosClass: BestEffort
-  startTime: "2022-03-18T21:23:08Z"
-
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-devops-wordpress
+  template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-devops-wordpress
+    spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+      containers:
+      - env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql-password
+              name: mysql-secrets
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        imagePullPolicy: Always
+        name: wordpress
+        ports:
+        - containerPort: 80
+          name: wordpress-port
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: wordpress-volume
+      volumes:
+      - name: wordpress-volume
+        persistentVolumeClaim:
+          claimName: wordpress-volume
