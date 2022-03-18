@@ -1,181 +1,24 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "1"
-    field.cattle.io/creatorId: u-4k4hxzzv4l
-    field.cattle.io/publicEndpoints: '[{"addresses":["35.198.29.215"],"port":80,"protocol":"TCP","serviceName":"devops:wordpress-loadbalancer","allNodes":false}]'
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1","field.cattle.io/creatorId":"u-4k4hxzzv4l","field.cattle.io/publicEndpoints":"[{\"addresses\":[\"35.198.29.215\"],\"port\":80,\"protocol\":\"TCP\",\"serviceName\":\"devops:wordpress-loadbalancer\",\"allNodes\":false}]"},"creationTimestamp":"2022-03-18T21:23:08Z","generation":2,"labels":{"cattle.io/creator":"norman","workload.user.cattle.io/workloadselector":"deployment-devops-wordpress"},"managedFields":[{"apiVersion":"apps/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{"f:deployment.kubernetes.io/revision":{}}},"f:status":{"f:availableReplicas":{},"f:conditions":{".":{},"k:{\"type\":\"Available\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Progressing\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:observedGeneration":{},"f:readyReplicas":{},"f:replicas":{},"f:updatedReplicas":{}}},"manager":"kube-controller-manager","operation":"Update","time":"2022-03-18T21:23:29Z"},{"apiVersion":"apps/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:field.cattle.io/creatorId":{},"f:field.cattle.io/publicEndpoints":{}},"f:labels":{".":{},"f:cattle.io/creator":{},"f:workload.user.cattle.io/workloadselector":{}}},"f:spec":{"f:progressDeadlineSeconds":{},"f:replicas":{},"f:revisionHistoryLimit":{},"f:selector":{},"f:strategy":{"f:rollingUpdate":{".":{},"f:maxSurge":{},"f:maxUnavailable":{}},"f:type":{}},"f:template":{"f:metadata":{"f:annotations":{".":{},"f:cattle.io/timestamp":{},"f:field.cattle.io/ports":{}},"f:labels":{".":{},"f:workload.user.cattle.io/workloadselector":{}}},"f:spec":{"f:containers":{"k:{\"name\":\"wordpress\"}":{".":{},"f:env":{".":{},"k:{\"name\":\"WORDPRESS_DB_HOST\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"WORDPRESS_DB_PASSWORD\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:secretKeyRef":{".":{},"f:key":{},"f:name":{},"f:optional":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:ports":{".":{},"k:{\"containerPort\":80,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}}},"f:resources":{},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{},"f:privileged":{},"f:readOnlyRootFilesystem":{},"f:runAsNonRoot":{}},"f:stdin":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:tty":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/var/www/html\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{},"f:volumes":{".":{},"k:{\"name\":\"wordpress-volume\"}":{".":{},"f:name":{},"f:persistentVolumeClaim":{".":{},"f:claimName":{}}}}}}}},"manager":"rancher","operation":"Update","time":"2022-03-18T21:23:45Z"}],"name":"wordpress","namespace":"devops","resourceVersion":"97969","uid":"04d81068-1195-49a5-998f-ebfae3f66df8"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"workload.user.cattle.io/workloadselector":"deployment-devops-wordpress"}},"strategy":{"rollingUpdate":{"maxSurge":1,"maxUnavailable":0},"type":"RollingUpdate"},"template":{"metadata":{"annotations":{"cattle.io/timestamp":"2022-03-18T21:22:39Z","field.cattle.io/ports":"[[{\"containerPort\":80,\"dnsName\":\"wordpress-loadbalancer\",\"hostPort\":0,\"kind\":\"LoadBalancer\",\"name\":\"wordpress-port\",\"protocol\":\"TCP\",\"sourcePort\":80}]]"},"creationTimestamp":null,"labels":{"workload.user.cattle.io/workloadselector":"deployment-devops-wordpress"}},"spec":{"containers":[{"env":[{"name":"WORDPRESS_DB_HOST","value":"mysql"},{"name":"WORDPRESS_DB_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysql-password","name":"mysql-secrets","optional":false}}}],"image":"wordpress:4.8-apache","imagePullPolicy":"Always","name":"wordpress","ports":[{"containerPort":80,"name":"wordpress-port","protocol":"TCP"}],"resources":{},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{},"privileged":false,"readOnlyRootFilesystem":false,"runAsNonRoot":false},"stdin":true,"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","tty":true,"volumeMounts":[{"mountPath":"/var/www/html","name":"wordpress-volume"}]}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"name":"wordpress-volume","persistentVolumeClaim":{"claimName":"wordpress-volume"}}]}}},"status":{"availableReplicas":1,"conditions":[{"lastTransitionTime":"2022-03-18T21:23:29Z","lastUpdateTime":"2022-03-18T21:23:29Z","message":"Deployment has minimum availability.","reason":"MinimumReplicasAvailable","status":"True","type":"Available"},{"lastTransitionTime":"2022-03-18T21:23:08Z","lastUpdateTime":"2022-03-18T21:23:29Z","message":"ReplicaSet \"wordpress-66b7cb5968\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"}],"observedGeneration":2,"readyReplicas":1,"replicas":1,"updatedReplicas":1}}
-  creationTimestamp: "2022-03-18T21:23:08Z"
-  generation: 3
+  namespace: devops
   labels:
     cattle.io/creator: norman
     workload.user.cattle.io/workloadselector: deployment-devops-wordpress
-  managedFields:
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          f:deployment.kubernetes.io/revision: {}
-      f:status:
-        f:availableReplicas: {}
-        f:conditions:
-          .: {}
-          k:{"type":"Available"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Progressing"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-        f:observedGeneration: {}
-        f:readyReplicas: {}
-        f:replicas: {}
-        f:updatedReplicas: {}
-    manager: kube-controller-manager
-    operation: Update
-    time: "2022-03-18T21:23:29Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          .: {}
-          f:field.cattle.io/creatorId: {}
-          f:field.cattle.io/publicEndpoints: {}
-        f:labels:
-          .: {}
-          f:cattle.io/creator: {}
-          f:workload.user.cattle.io/workloadselector: {}
-      f:spec:
-        f:progressDeadlineSeconds: {}
-        f:replicas: {}
-        f:revisionHistoryLimit: {}
-        f:selector: {}
-        f:strategy:
-          f:rollingUpdate:
-            .: {}
-            f:maxSurge: {}
-            f:maxUnavailable: {}
-          f:type: {}
-        f:template:
-          f:metadata:
-            f:annotations:
-              .: {}
-              f:cattle.io/timestamp: {}
-              f:field.cattle.io/ports: {}
-            f:labels:
-              .: {}
-              f:workload.user.cattle.io/workloadselector: {}
-          f:spec:
-            f:containers:
-              k:{"name":"wordpress"}:
-                .: {}
-                f:env:
-                  .: {}
-                  k:{"name":"WORDPRESS_DB_HOST"}:
-                    .: {}
-                    f:name: {}
-                    f:value: {}
-                  k:{"name":"WORDPRESS_DB_PASSWORD"}:
-                    .: {}
-                    f:name: {}
-                    f:valueFrom:
-                      .: {}
-                      f:secretKeyRef:
-                        .: {}
-                        f:key: {}
-                        f:name: {}
-                        f:optional: {}
-                f:image: {}
-                f:imagePullPolicy: {}
-                f:name: {}
-                f:ports:
-                  .: {}
-                  k:{"containerPort":80,"protocol":"TCP"}:
-                    .: {}
-                    f:containerPort: {}
-                    f:name: {}
-                    f:protocol: {}
-                f:resources: {}
-                f:securityContext:
-                  .: {}
-                  f:allowPrivilegeEscalation: {}
-                  f:capabilities: {}
-                  f:privileged: {}
-                  f:readOnlyRootFilesystem: {}
-                  f:runAsNonRoot: {}
-                f:stdin: {}
-                f:terminationMessagePath: {}
-                f:terminationMessagePolicy: {}
-                f:tty: {}
-                f:volumeMounts:
-                  .: {}
-                  k:{"mountPath":"/var/www/html"}:
-                    .: {}
-                    f:mountPath: {}
-                    f:name: {}
-            f:dnsPolicy: {}
-            f:restartPolicy: {}
-            f:schedulerName: {}
-            f:securityContext: {}
-            f:terminationGracePeriodSeconds: {}
-            f:volumes:
-              .: {}
-              k:{"name":"wordpress-volume"}:
-                .: {}
-                f:name: {}
-                f:persistentVolumeClaim:
-                  .: {}
-                  f:claimName: {}
-    manager: rancher
-    operation: Update
-    time: "2022-03-18T21:23:45Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          f:kubectl.kubernetes.io/last-applied-configuration: {}
-    manager: kubectl
-    operation: Update
-    time: "2022-03-18T21:44:16Z"
   name: wordpress
-  namespace: devops
-  resourceVersion: "107580"
-  uid: 04d81068-1195-49a5-998f-ebfae3f66df8
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       workload.user.cattle.io/workloadselector: deployment-devops-wordpress
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-    type: RollingUpdate
   template:
     metadata:
-      annotations:
-        cattle.io/timestamp: "2022-03-18T21:22:39Z"
-        field.cattle.io/ports: '[[{"containerPort":80,"dnsName":"wordpress-loadbalancer","hostPort":0,"kind":"LoadBalancer","name":"wordpress-port","protocol":"TCP","sourcePort":80}]]'
-      creationTimestamp: null
       labels:
         workload.user.cattle.io/workloadselector: deployment-devops-wordpress
     spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
       containers:
       - env:
         - name: WORDPRESS_DB_HOST
@@ -185,54 +28,17 @@ spec:
             secretKeyRef:
               key: mysql-password
               name: mysql-secrets
-              optional: false
-        image: wordpress:4.8-apache
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         imagePullPolicy: Always
         name: wordpress
         ports:
         - containerPort: 80
           name: wordpress-port
           protocol: TCP
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities: {}
-          privileged: false
-          readOnlyRootFilesystem: false
-          runAsNonRoot: false
-        stdin: true
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        tty: true
         volumeMounts:
         - mountPath: /var/www/html
           name: wordpress-volume
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
       volumes:
       - name: wordpress-volume
         persistentVolumeClaim:
           claimName: wordpress-volume
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2022-03-18T21:23:29Z"
-    lastUpdateTime: "2022-03-18T21:23:29Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2022-03-18T21:23:08Z"
-    lastUpdateTime: "2022-03-18T21:23:29Z"
-    message: ReplicaSet "wordpress-66b7cb5968" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 3
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1
-
